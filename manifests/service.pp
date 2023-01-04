@@ -7,7 +7,11 @@
 class puppetserver::service {
 
   # Ensure the puppet server service is correctly set
+  $service_state = $::puppetserver::package_ensure ? {
+    /('installed'|'present')/ => 'running',
+    default                   => 'stopped',
+  }
   service { 'puppetserver':
-    ensure => $::puppetserver::package_ensure,
+    ensure => $service_state,
   }
 }
