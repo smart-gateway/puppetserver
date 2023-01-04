@@ -9,9 +9,11 @@ class puppetserver::install {
     case $puppetserver::package_ensure {
       'installed', 'present': {
         notify { 'Puppet Server Module Installing...': }
+        Class['::puppetserver::implementation::installer']
       }
       'purged', 'absent': {
         notify { 'Puppet Server Module Uninstalling...': }
+        Class['::puppetserver::implementation::uninstaller']
       }
       'disabled': {
         notify { 'Puppet Server Module Disabling...': }
