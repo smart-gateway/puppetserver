@@ -30,6 +30,7 @@ class puppetserver(
     anchor { '::puppetserver::begin': }
     -> Class['::puppetserver::install']
     -> Class['::puppetserver::config']
+    -> Class['::puppetserver::implementation::runner']
     -> Class['::puppetserver::service']
     -> anchor { '::puppetserver::end': }
   }

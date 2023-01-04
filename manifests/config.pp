@@ -6,9 +6,6 @@
 #   include puppetserver::config
 class puppetserver::config {
 
-  # Ensure the runner is configured
-  Class['::puppetserver::implementation::runner']
-
   # Configure the server setting alt_dns_names
   exec { 'configure server setting alt_dns_names':
     command => "puppet config set dns_alt_names '${::puppetserver::server_name}' --section server",
