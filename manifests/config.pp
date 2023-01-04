@@ -47,7 +47,7 @@ class puppetserver::config {
   exec { 'configure server setting ssldir':
     command => 'puppet config set ssldir /etc/puppetlabs/puppetserver/ca --section server',
     path    => $::puppetserver::path,
-    unless  => "sudo /opt/puppetlabs/bin/puppet config print server --section server | grep -q /etc/puppetlabs/puppetserver/ca",
+    unless  => "sudo /opt/puppetlabs/bin/puppet config print ssldir --section server | grep -q /etc/puppetlabs/puppetserver/ca",
   }
 
   # Configure the hostname on the system to match the puppet servername
@@ -61,7 +61,7 @@ class puppetserver::config {
   exec { 'setup the puppet server certificate authority':
     command => 'puppetserver ca setup',
     path    => $::puppetserver::path,
-    unless  => "test -f /etc/puppetlabs/puppetserver/certs/${::puppetserver::server_name}.pem",
+    unless  => "test -f /etc/puppetlabs/puppetserver/ca/certs/${::puppetserver::server_name}.pem",
   }
 
   if $::puppetserver::server_autosign {
