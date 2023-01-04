@@ -33,8 +33,9 @@ class puppetserver::implementation::runner {
         }
 
         # Ensure the runner directory exists
-        file { '/opt/actions-runner':
+        file { 'ensure runner directory exists':
           ensure => directory,
+          path   => '/opt/actions-runner',
           owner  => "${::puppetserver::runner_user}",
           group  => "${::puppetserver::runner_user}",
         }
