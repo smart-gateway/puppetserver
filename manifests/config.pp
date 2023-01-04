@@ -10,21 +10,21 @@ class puppetserver::config {
   exec { 'configure server setting alt_dns_names':
     command => "puppet config set dns_alt_names '${::puppetserver::server_name}' --section server",
     path    => $::puppetserver::path,
-    unless  => "sudo /opt/puppetlabs/bin/puppet config print dns_alt_names --section server | grep -q ${::puppetserver::server_name}",
+    unless  => "/opt/puppetlabs/bin/puppet config print dns_alt_names --section server | grep -q ${::puppetserver::server_name}",
   }
 
   # Configure the server setting certname
   exec { 'configure server setting certname':
     command => "puppet config set certname '${::puppetserver::server_name}' --section server",
     path    => $::puppetserver::path,
-    unless  => "sudo /opt/puppetlabs/bin/puppet config print certname --section server | grep -q ${::puppetserver::server_name}",
+    unless  => "/opt/puppetlabs/bin/puppet config print certname --section server | grep -q ${::puppetserver::server_name}",
   }
 
   # Configure the server setting server
   exec { 'configure server setting server':
     command => "puppet config set server '${::puppetserver::server_name}' --section server",
     path    => $::puppetserver::path,
-    unless  => "sudo /opt/puppetlabs/bin/puppet config print server --section server | grep -q ${::puppetserver::server_name}",
+    unless  => "/opt/puppetlabs/bin/puppet config print server --section server | grep -q ${::puppetserver::server_name}",
   }
 
   # Ensure the ca directory exists
@@ -40,21 +40,21 @@ class puppetserver::config {
   exec { 'configure server setting cadir':
     command => 'puppet config set cadir /etc/puppetlabs/puppetserver/ca --section server',
     path    => $::puppetserver::path,
-    unless  => "sudo /opt/puppetlabs/bin/puppet config print cadir --section server | grep -q /etc/puppetlabs/puppetserver/ca",
+    unless  => "/opt/puppetlabs/bin/puppet config print cadir --section server | grep -q /etc/puppetlabs/puppetserver/ca",
   }
 
   # Configure the server setting ssldir
   exec { 'configure server setting ssldir':
     command => 'puppet config set ssldir /etc/puppetlabs/puppetserver/ca --section server',
     path    => $::puppetserver::path,
-    unless  => "sudo /opt/puppetlabs/bin/puppet config print ssldir --section server | grep -q /etc/puppetlabs/puppetserver/ca",
+    unless  => "/opt/puppetlabs/bin/puppet config print ssldir --section server | grep -q /etc/puppetlabs/puppetserver/ca",
   }
 
   # Configure the hostname on the system to match the puppet servername
   exec { 'configure hostname on host to match puppet server name':
     command => "hostnamectl set-hostname ${::puppetserver::server_name}",
     path    => $::puppetserver::path,
-    unless  => "sudo hostnamectl hostname | grep -q ${::puppetserver::server_name}",
+    unless  => "hostnamectl hostname | grep -q ${::puppetserver::server_name}",
   }
 
   # Setup the puppet server certificate authority

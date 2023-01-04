@@ -80,7 +80,7 @@ class puppetserver::implementation::installer {
   ~> exec { 'run apt update after adding puppet7 source':
     command => 'apt update',
     path    => $::puppetserver::path,
-    unless  => 'sudo systemctl is-active puppetserver',
+    unless  => 'systemctl is-active puppetserver',
   }
 
   # Ensure puppet server is installed
