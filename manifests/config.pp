@@ -90,3 +90,4 @@ class puppetserver::config {
     match  => '^127.0.0.1',
   }
 }
+
