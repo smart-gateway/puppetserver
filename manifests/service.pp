@@ -5,4 +5,9 @@
 # @example
 #   include puppetserver::service
 class puppetserver::service {
+
+  # Ensure the puppet server service is correctly set
+  service { 'puppetserver':
+    ensure => $::puppetserver::package_ensure,
+  }
 }
