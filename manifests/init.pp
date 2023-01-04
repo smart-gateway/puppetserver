@@ -21,9 +21,6 @@ class puppetserver(
   contain puppetserver::install
   contain puppetserver::config
   contain puppetserver::service
-  contain puppetserver::implementation::runner
-  contain puppetserver::implementation::installer
-  contain puppetserver::implementation::uninstaller
 
   # Execute classes in order
   if $puppetserver::package_manage {

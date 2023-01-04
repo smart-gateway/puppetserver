@@ -12,6 +12,7 @@ class puppetserver::service {
     'present'   => 'running',
     default     => 'stopped',
   }
+
   service { 'puppetserver':
     ensure => $service_state,
   }

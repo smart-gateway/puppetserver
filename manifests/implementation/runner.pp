@@ -9,8 +9,6 @@ class puppetserver::implementation::runner {
   if $puppetserver::runner_manage {
     case $puppetserver::runner_ensure {
       'installed', 'present': {
-        # Output notify message
-        notify { 'Installing Control Repo Runner...': }
 
         # Ensure r10k can be run without a password. Add on it's own line so that any changes by the user aren't lost
         file_line { 'ensure r10k can be run as sudo without a password':
@@ -78,12 +76,11 @@ class puppetserver::implementation::runner {
           command => '/opt/actions-runner/svc.sh start',
           path    => $::puppetserver::path,
           cwd     => '/opt/actions-runner/',
-          unless  => 'sudo /opt/actions-runner/svc.sh status | grep -q "active (running)"',
+          unless  => '/opt/actions-runner/svc.sh status | grep -q "active (running)"',
         }
       }
 
       'purged', 'absent': {
-        notify { 'Removing Control Repo Runner...': }
 
         # ensure runner service is uninstalled
         exec { 'ensure the github actions runner is uninstalled':
@@ -109,14 +106,13 @@ class puppetserver::implementation::runner {
       }
 
       'disabled': {
-        notify { 'Disabling Control Repo Runner...': }
 
         # ensure runner service is not running
         exec { 'ensure the github actions runner is not running':
           command => '/opt/actions-runner/svc.sh stop',
           path    => $::puppetserver::path,
           cwd     => '/opt/actions-runner/',
-          unless  => 'sudo /opt/actions-runner/svc.sh status | grep -q "inactive (dead)"',
+          unless  => '/opt/actions-runner/svc.sh status | grep -q "inactive (dead)"',
         }
       }
 
