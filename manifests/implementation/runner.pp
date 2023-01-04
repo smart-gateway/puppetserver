@@ -56,7 +56,7 @@ class puppetserver::implementation::runner {
 
         # Configure the runner
         $runner_url = regsubst($puppetserver::control_repo_url, '.git$', '')
-        -> exec { 'configure the github actions runner':
+        exec { 'configure the github actions runner':
           command  => "/opt/actions-runner/config.sh --url ${$runner_url} --token ${::puppetserver::runner_token} --unattended",
           path     => $::puppetserver::path,
           provider => shell,
