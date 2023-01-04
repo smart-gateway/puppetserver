@@ -21,8 +21,9 @@ class puppetserver::implementation::installer {
   }
 
   # Provision control repo access key
-  file { '/root/.ssh/id_control':
+  file { 'provision control repo deploy key':
     ensure  => file,
+    path    => '/root/.ssh/id_control',
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
@@ -30,8 +31,9 @@ class puppetserver::implementation::installer {
   }
 
   # Ensure the config file exists
-  file { 'root/.ssh/config':
+  file { 'ensure config file exists':
     ensure => file,
+    path   => '/root/.ssh/config',
     owner  => 'root',
     group  => 'root',
     mode   => '0600',
@@ -45,16 +47,18 @@ class puppetserver::implementation::installer {
   }
 
   # Ensure the config.d directory exists
-  file { '/root/.ssh/config.d':
+  file { 'ensure config.d directory exists':
     ensure => directory,
+    path   => '/root/.ssh/config.d',
     owner  => 'root',
     group  => 'root',
     mode   => '0700',
   }
 
   # Ensure the control repo configuration exists
-  -> file { '/root/.ssh/config.d/control-repo.conf':
+  ~> file { 'ensure control repo configuration exists':
     ensure  => file,
+    path    => '/root/.ssh/config.d/control-repo.conf',
     owner   => 'root',
     group   => 'root',
     mode    => '0600',
