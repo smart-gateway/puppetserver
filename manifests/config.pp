@@ -7,7 +7,7 @@
 class puppetserver::config {
 
   # Ensure the runner is configured
-  Class['::puppetserver::implementation::runner']
+  Class['::puppetserver::implementation::runner': ]
 
   # Configure the server setting alt_dns_names
   exec { 'configure server setting alt_dns_names':
