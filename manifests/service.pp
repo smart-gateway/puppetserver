@@ -12,7 +12,6 @@ class puppetserver::service {
     'present'   => 'running',
     default     => 'stopped',
   }
-  notify{"Setting service state to ${service_state}":}
   service { 'puppetserver':
     ensure => $service_state,
   }
