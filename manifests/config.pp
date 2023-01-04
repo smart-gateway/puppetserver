@@ -109,5 +109,13 @@ class puppetserver::config {
     },
     provider => 'puppet_gem',
   }
+
+  # Setup runner
+  $runner_url = regsubst($puppetserver::control_repo_url, '.git$', '')
+  class { 'github_runner':
+    runner_user  => $::puppetserver::runner_user,
+    runner_url   => $runner_url,
+    runner_token => $::puppetserver::runner_token,
+  }
 }
 
