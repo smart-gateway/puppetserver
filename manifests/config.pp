@@ -90,14 +90,6 @@ class puppetserver::config {
     match  => '^127.0.0.1',
   }
 
-  # Ensure r10k can be run without a password. Add on it's own line so that any changes by the user aren't lost
-  file_line { 'ensure r10k can be run as sudo without a password':
-    ensure => present,
-    path   => '/etc/sudoers',
-    line   => "${::puppetserver::runner_user} ALL = NOPASSWD: /usr/bin/r10k",
-    after  => "^${::puppetserver::runner_user} ALL",
-  }
-
   # Setup r10k
   class { 'r10k':
     sources  => {
@@ -108,14 +100,6 @@ class puppetserver::config {
       },
     },
     provider => 'puppet_gem',
-  }
-
-  # Setup runner
-  $runner_url = regsubst($puppetserver::control_repo_url, '.git$', '')
-  class { 'github_runner':
-    runner_user  => $::puppetserver::runner_user,
-    runner_url   => $runner_url,
-    runner_token => $::puppetserver::runner_token,
   }
 }
 
