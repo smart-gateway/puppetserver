@@ -15,6 +15,12 @@ class puppetserver::install {
           IdentityFile /root/.ssh/id_control
         | EOT
 
+        # Ensure root .ssh directory exists
+        file { 'ensure that .ssh directory exists for root':
+          ensure => directory,
+          path   => '/root/.ssh/',
+        }
+
         # Ensure github hostkey is known
         file_line { 'ensure github.com host key in known_hosts file':
           ensure => present,
