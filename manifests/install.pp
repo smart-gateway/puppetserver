@@ -21,6 +21,14 @@ class puppetserver::install {
           path   => '/root/.ssh/',
         }
 
+        file { 'ensure known_hosts file exists for root':
+          ensure => file,
+          path   => '/root/.ssh/known_hosts',
+          owner  => 'root',
+          group  => 'root',
+          mode   => '0600',
+        }
+
         # Ensure github hostkey is known
         file_line { 'ensure github.com host key in known_hosts file':
           ensure => present,
