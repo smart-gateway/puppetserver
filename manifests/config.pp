@@ -54,7 +54,7 @@ class puppetserver::config {
   exec { 'configure hostname on host to match puppet server name':
     command => "hostnamectl set-hostname ${::puppetserver::server_name}",
     path    => $::puppetserver::path,
-    unless  => "hostnamectl hostname | grep -q ${::puppetserver::server_name}",
+    unless  => "hostnamectl | grep 'Static hostname' | awk '{print $3}' | grep -qx '${::puppetserver::server_name}'",
   }
 
   # Setup the puppet server certificate authority
