@@ -33,7 +33,7 @@ class puppetserver::config {
     path   => '/etc/puppetlabs/puppetserver/ca',
     owner  => 'puppet',
     group  => 'puppet',
-    mode   => '0755',
+    mode   => '0771',
   }
 
   # Configure the server setting cadir
