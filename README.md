@@ -1,3 +1,7 @@
+```
+THIS REPOSITORY HAS BEEN ARCHIVED. IT HAS BEEN MOVED INTERNALLY AND THIS COPY WILL NO LONGER BE UPDATED. 
+```
+
 # puppetserver
 
 Welcome to your new module. A short overview of the generated parts can be found
